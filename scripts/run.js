@@ -2,7 +2,7 @@ const { hexStripZeros } = require("@ethersproject/bytes");
 
 async function main() {
 
-  const [owner, randoPerson] = await hre.ethers.getSigners();
+  // const [owner, randoPerson] = await hre.ethers.getSigners();
 
   const waveContractFactory = await hre.ethers.getContractFactory("WavePortal"); // compiles the contract for us; looks in contract portal and looks for WavePortal
 
@@ -19,11 +19,14 @@ async function main() {
   // let waveCount;
   // waveCount = await waveContract.getTotalWaves();
 
-  let waveTxn = await waveContract.wave("Deez nuts");
+  let waveTxn = await waveContract.wave("Deez nuts 1");
+  await waveTxn.wait();
+
+  waveTxn = await waveContract.wave("Deez nuts 2");
   await waveTxn.wait();
 
   contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
-  console.log("Contract balance: ",hre.ethers.utils.formatEther(contractBalance));
+  console.log("Contract balance: ", hre.ethers.utils.formatEther(contractBalance));
 
   // waveCount = await waveContract.getTotalWaves();
 
